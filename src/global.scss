@@ -1,0 +1,682 @@
+/*//////////////////////////////////////////////////////////////////
+[ MIXINS ]*/
+
+$break-tablet: 610px;
+$break-desktop: 1540px;
+
+// * de $mq hacia arriba, $mq incluido
+@mixin media-to-up($mq) {
+  @media (min-width: $mq) {
+    @content;
+  }
+}
+
+// * de $mq hacia abajo, $mq incluido
+@mixin media-to-down($mq) {
+  @media (max-width: $mq) {
+    @content;
+  }
+}
+
+// * de $mq-min a $mq-max, ambos incluidos
+@mixin media-between($mq-min, $mq-max) {
+  @media (min-width: $mq-min) and (max-width: $mq-max) {
+    @content;
+  }
+}
+
+// ! SM ----------------------------------
+// * de 0px a 610px. 610px incluido
+@mixin only-sm() {
+  @include media-to-down($break-tablet) {
+    @content;
+  }
+}
+
+// ! MD ----------------------------------
+// * de 611px a infinito. 611px incluido
+@mixin md() {
+  @include media-to-up($break-tablet + 1) {
+    @content;
+  }
+}
+
+// * de 611px a 1190px. 611px y 1190px incluidos
+@mixin only-md() {
+  @include media-between(($break-tablet + 1), $break-desktop) {
+    @content;
+  }
+}
+
+// ! LG ----------------------------------
+// * de 1190px a infinito, 1190px incluido
+@mixin lg() {
+  @include media-to-up($break-desktop + 1) {
+    @content;
+  }
+}
+
+@mixin x-lg() {
+  @include media-to-up($break-desktop + 1) {
+    @content;
+  }
+}
+
+/*//////////////////////////////////////////////////////////////////
+[ IMPORTS]*/
+@import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap");
+
+@import "modules/Home.scss";
+@import "modules/Analysis.scss";
+
+/* fonts.css */
+@font-face {
+  font-family: "Digital";
+  src: url("/fonts/DS-DIGIB.TTF") format("truetype");
+  /* Agrega otros formatos de archivo si tu fuente tiene más opciones */
+}
+
+/*//////////////////////////////////////////////////////////////////
+[ RESTYLE TAG ]*/
+
+* {
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+/*! locomotive-scroll v3.6.1 | MIT License | https://github.com/locomotivemtl/locomotive-scroll */
+html.has-scroll-smooth {
+  overflow: hidden;
+}
+
+html.has-scroll-dragging {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.has-scroll-smooth body {
+  overflow: hidden;
+}
+
+.has-scroll-smooth [data-scroll-container] {
+  min-height: 100vh;
+}
+
+/*//////////////////////////////////////////////////////////////////
+[ ]*/
+html,
+body {
+  margin: 0;
+  background: #000000;
+  height: 100vh;
+  font-style: normal;
+  font-weight: 100;
+}
+
+blockquote,
+dd,
+dl,
+figure,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+p,
+pre {
+  margin: 0;
+}
+
+// COLORS
+:root {
+  --black: #000000;
+  --black-light-1: #27272a;
+  --black-light-2: #3f3f45;
+  --black-light-3: #1f1f1f;
+  --black-light-4: #141414;
+  --black-light-5: #0a0b07; 
+  --primary: #009A6E;
+  --secondary: #105d5E;
+  --white: #e2e2e2;
+  --grey-light-1: #a6a6a6;
+  --grey-light-2: #6b6b7d;
+  --grey-light-3: #c0bcce;
+}
+
+/*//////////////////////////////////////////////////////////////////
+[ SCROLLBAR ]*/
+
+::-webkit-scrollbar {
+  width: 6px !important;
+  height: 4px !important;
+}
+
+html[dir] .dark ::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.16);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--black-light-3);
+  border-radius: 50px;
+}
+
+html[dir] .dark ::-webkit-scrollbar-track {
+  background-color: initial;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--black);
+}
+
+/*//////////////////////////////////////////////////////////////////
+[ TITLES ]*/
+
+h1 {
+  color: var(--white);
+  font-size: clamp(8px, 8vw, 22px);
+  line-height: 1.6rem;
+  font-weight: 600;
+}
+
+h2 {
+  color: var(--red-light);
+  font-size: clamp(6px, 8vw, 18px);
+  font-family: "Digital";
+  font-family: "Rajdhani", sans-serif;
+  line-height: 1rem;
+  font-weight: 700;
+}
+
+h3 {
+  color: var(--grey-light-1);
+  font-size: clamp(6px, 8vw, 10.5px);
+  line-height: 0.8rem;
+  font-weight: 100;
+}
+
+h4 {
+  color: var(--white);
+  font-size: clamp(5px, 8vw, 11px);
+  font-weight: 100;
+  @include md {
+    font-size: clamp(6px, 8vw, 13.5px);
+    line-height: 1rem;
+    font-weight: normal;
+  }
+}
+
+h5 {
+  color: var(--white);
+  font-size: clamp(4px, 8vw, 9px);
+  line-height: 1rem;
+  font-weight: normal;
+  @include md {
+    font-size: clamp(5px, 8vw, 11px);
+    line-height: 1rem;
+  }
+}
+
+h6 {
+  color: var(--white);
+  font-size: clamp(4px, 8vw, 7px);
+  line-height: 1rem;
+
+  @include md {
+    font-size: clamp(5px, 8vw, 8px);
+    line-height: 0.8rem;
+  }
+}
+
+p {
+  color: var(--white);
+  font-size: clamp(6px, 8vw, 12.5px);
+  line-height: 0.9rem;
+  font-weight: 500;
+}
+
+span {
+  color: var(--grey-light-2);
+  font-size: clamp(2px, 5vw, 12px);
+  line-height: 0.8rem;
+  font-weight: 100;
+}
+
+input {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: none;
+  font-family: "__Sora_fdd6c4", "__Sora_Fallback_fdd6c4";
+  background-color: var(--black-light-3);
+  border: none;
+  width: 100%;
+  text-align: left;
+  border-radius: 10px;
+  padding: 0 10px 0 15px;
+  font-size: clamp(5.5px, 8vw, 12.5px);
+  font-weight: 400;
+  border: 1px solid var(--black-light-3);
+  transition: all 0.25s ease-out;
+  height: 40px;
+  color: var(--white);
+  &:focus {
+    border: 1px solid var(--primary);
+  }
+  &::placeholder {
+    color: var(--grey-light-2);
+  }
+}
+
+textarea {
+  font-family: "__Sora_fdd6c4", "__Sora_Fallback_fdd6c4";
+}
+
+button {
+  transition: all 0.25s ease-out;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: "__Sora_fdd6c4", "__Sora_Fallback_fdd6c4";
+  height: 38px;
+  &:active {
+    transform: scale(0.85);
+  }
+}
+
+svg {
+  transition: all 0.5s ease-out;
+}
+
+::-moz-selection {
+  background-color: var(--orange);
+  color: var(--white);
+}
+
+::selection {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+section {
+  height: calc(100vh - 75px);
+  overflow: auto;
+  // padding: 1.5rem;
+  padding-bottom: 85px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem 0.5rem;
+}
+
+code {
+  color: var(--white);
+}
+select {
+  box-sizing: border-box;
+  outline: none;
+  font-family: "__Sora_fdd6c4", "__Sora_Fallback_fdd6c4";
+  font-size: clamp(6.5px, 8vw, 13px);
+  font-weight: 400;
+
+  height: 38px;
+  width: 100%;
+  background-color: var(--black-light-3);
+  border: none;
+  border-radius: 12px;
+  border: 1px solid transparent;
+ 
+  transition: all 0.15s ease-in;
+  appearance: none;
+  cursor: pointer;
+  
+}
+.select {
+  max-width: 180px;
+  position: relative;
+  cursor: pointer;
+  .label-select {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) rotate(0deg);
+    color: var(--white);
+    font-size: clamp(6.5px, 8vw, 13px);
+    font-weight: 400;
+    left: 18px;
+    user-select: none;
+  }
+  .icon-select {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) rotate(0deg);
+    height: 1rem;
+    width: 1rem;
+    right: 15px;
+    color: var(--grey-light-1);
+  }
+  .item-select {
+    color: var(--primary);
+  }
+  select {
+    
+    text-align: left;
+    color: var(--primary);
+
+    padding-left: 60px;
+   
+  }
+}
+
+select:focus {
+  border: 1px solid var(--primary);
+}
+
+.btn-success {
+  background-color: var(--primary);
+  width: 100%;
+  font-size: clamp(5.5px, 8vw, 12px);
+  font-weight: 500;
+  border-radius: 10px;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  &:hover{
+    background-color: var(--secondary);
+  }
+}
+.btn-cancel{
+  background-color: var(--black-light-2);
+  color: var(--grey-light-3);
+  &:hover{
+    background-color: var(--secondary);
+    color: var(--black);
+  }
+}
+
+.btn-edit{
+  background-color: var(--black-light-2);
+  color: var(--grey-light-3);
+}
+.btn-delete{
+  background-color: var(--black-light-2);
+  color: var(--grey-light-3);
+}
+/*//////////////////////////////////////////////////////////////////
+[ ERROR 404]*/
+/* chart.module.css */
+.apexcharts-toolbar {
+  display: none !important; /* Oculta el toolbar usando CSS */
+}
+
+.chart-hidden {
+  opacity: 0;
+  display: none;
+  transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
+}
+
+.chart-visible {
+  opacity: 0.8;
+  display: block;
+  transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
+}
+
+.loader-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.separator {
+  margin: 1rem;
+  border: 1px solid red;
+  width: 100%;
+}
+
+/*//////////////////////////////////////////////////////////////////
+[ PAGE-404 ]*/
+
+.container-404 {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-width: 240px;
+  width: 100%;
+  text-align: center;
+  span {
+    font-size: clamp(8px, 8vw, 20px);
+    font-weight: 500;
+    line-height: 1.4rem;
+  }
+  p {
+    color: var(--grey-light-1);
+    margin-bottom: 1.3rem;
+    line-height: 1rem;
+  }
+  button {
+    width: 100%;
+    background-color: #ffffff10;
+    font-size: clamp(5.5px, 8vw, 12px);
+    font-weight: 400;
+    border-radius: 10px;
+    height: 40px;
+    padding: 0 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    color: #ffffff66;
+    &:hover {
+      background-color: var(--secondary);
+      color: var(--white);
+    }
+  }
+}
+
+
+/*==========================================*/
+/*--------------Check-------------*/
+/*==========================================*/
+
+.checkbox-wrapper {
+  display: grid;
+  place-items: center;
+  svg {
+    width: 1.25rem;
+    height: 1.25rem;
+
+  }
+  .stroke {
+    fill: none;
+    stroke: var(--black);
+    stroke-width: 2.5px;
+    stroke-dasharray: 100; /* La longitud total del contorno */
+    stroke-dashoffset: 100; /* Iniciar con el trazo completo oculto */
+    animation: fillStrokeCircle 0.6s ease-in forwards; /* Animación para el círculo */
+  }
+  .check {
+    fill: none;
+    stroke: var(--black);
+    stroke-width: 2.5px;
+    stroke-dasharray: 100; /* La longitud total del contorno */
+    stroke-dashoffset: 100; /* Iniciar con el trazo completo oculto */
+    animation: fillStrokeCheck 0.8s ease-in 0.3s forwards; /* Animación para la polilínea */
+  }
+}
+
+@keyframes fillStrokeCircle {
+  from {
+    stroke-dashoffset: 100; /* Iniciar con el trazo completo oculto */
+  }
+  to {
+    stroke-dashoffset: 0; /* Mostrar el trazo completo al final de la animación */
+  }
+}
+
+@keyframes fillStrokeCheck {
+  from {
+    stroke-dashoffset: 100; /* Iniciar con el trazo completo oculto */
+  }
+  to {
+    stroke-dashoffset: 0; /* Mostrar el trazo completo al final de la animación */
+  }
+}
+
+
+/*==========================================*/
+/*--------------LOADER-------------*/
+/*==========================================*/
+
+.sending,.success {
+  background-color: var(--secondary) !important;
+  opacity: 1;
+}
+
+
+.loader {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--black);
+  animation: spinner-bulqg1 0.8s infinite linear alternate,
+    spinner-oaa3wk 1.6s infinite linear;
+}
+
+@keyframes spinner-bulqg1 {
+  0% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 50% 0%, 50% 0%, 50% 0%, 50% 0%);
+  }
+
+  12.5% {
+    clip-path: polygon(
+      50% 50%,
+      0 0,
+      50% 0%,
+      100% 0%,
+      100% 0%,
+      100% 0%,
+      100% 0%
+    );
+  }
+
+  25% {
+    clip-path: polygon(
+      50% 50%,
+      0 0,
+      50% 0%,
+      100% 0%,
+      100% 100%,
+      100% 100%,
+      100% 100%
+    );
+  }
+
+  50% {
+    clip-path: polygon(
+      50% 50%,
+      0 0,
+      50% 0%,
+      100% 0%,
+      100% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+
+  62.5% {
+    clip-path: polygon(
+      50% 50%,
+      100% 0,
+      100% 0%,
+      100% 0%,
+      100% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+
+  75% {
+    clip-path: polygon(
+      50% 50%,
+      100% 100%,
+      100% 100%,
+      100% 100%,
+      100% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+
+  100% {
+    clip-path: polygon(
+      50% 50%,
+      50% 100%,
+      50% 100%,
+      50% 100%,
+      50% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+}
+
+@keyframes spinner-oaa3wk {
+  0% {
+    transform: scaleY(1) rotate(0deg);
+  }
+
+  49.99% {
+    transform: scaleY(1) rotate(135deg);
+  }
+
+  50% {
+    transform: scaleY(-1) rotate(0deg);
+  }
+
+  100% {
+    transform: scaleY(-1) rotate(-135deg);
+  }
+}
+
+.loader-container{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--black);
+  opacity: 1; /* Inicialmente visible */
+  transition: opacity 1s ease; /* Transición suave de opacidad */
+  z-index: 2;
+  .loader{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--black-light-3);
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    border-radius: 10px;
+  }
+}
+
+
+.loader-container.hidden {
+  opacity: 0; /* Ocultar con transición de opacidad */
+  pointer-events: none; /* Evita interacción mientras está oculto */
+}
+
+
+.btn-noti{
+background-color: var(--black-light-2);
+}

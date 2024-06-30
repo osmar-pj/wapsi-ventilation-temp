@@ -1,0 +1,127 @@
+/**/
+
+.gra-h {
+  width: 100%;
+  height: 400px;
+  padding: 0 0.5rem;
+}
+
+canvas {
+  width: 100% !important; /* Fuerza el canvas a ocupar el 100% del ancho del contenedor */
+  height: 100% !important; /* Fuerza el canvas a ocupar el 100% de la altura del contenedor */
+}
+
+.highcharts-figure{
+  position: relative;
+}
+
+/*==========================================*/
+/*----------------LEYENDA-------------------*/
+/*==========================================*/
+
+.leyend {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  .i-leyend {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    .i-leyend-circle {
+      height: 8px;
+      width: 8px;
+      border-radius: 50%;
+    }
+    span {
+      color: var(--grey-light-3);
+      font-size: clamp(5px, 8vw, 9px);
+      font-weight: 500;
+    }
+  }
+}
+
+.ley-green {
+  background-color: #0bb97d;
+}
+
+.ley-yellow {
+  background-color: #b9a50c;
+}
+.ley-red {
+  background-color: #ff1437;
+}
+/*==========================================*/
+/*--------------LEYENDA-------------*/
+/*==========================================*/
+
+.single-chart {
+  width: 3.8rem;
+  position: relative;
+}
+
+.circular-chart {
+  display: block;
+  margin: 0 auto;
+}
+
+.circle-bg {
+  fill: none;
+  stroke: var(--black-light-1);
+  stroke-width: 3.8;
+}
+
+.circle {
+  fill: none;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  animation: progress 1s ease-out forwards;
+}
+
+@keyframes progress {
+  0% {
+    stroke-dasharray: 0 100;
+  }
+}
+
+.percentage {
+  color: var(--grey-light-3);
+  font-size: clamp(5px, 5vw, 10px);
+  text-anchor: middle;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 600;
+}
+
+
+/*==========================================*/
+/*--------------RELOAD-------------*/
+/*==========================================*/
+.cont-reload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  margin-top: 1rem;
+  span {
+    font-size: clamp(5px, 5vw, 10.5px);
+  }
+}
+.btn-reload {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 5px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  background-color: var(--grey-light-2);
+  svg {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+}
+/*==========================================*/
+/*--------------VALUES LEVEL-------------*/
+/*==========================================*/
+

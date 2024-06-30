@@ -3,14 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 7002",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.6.0",
+    "apexcharts": "^3.45.1",
+    "chart.js": "^4.4.3",
+    "chartjs-adapter-date-fns": "^3.0.0",
+    "dayjs": "^1.11.11",
+    "highcharts": "^11.4.3",
+    "highcharts-react-official": "^3.2.1",
+    "immer": "^10.1.1",
+    "next": "^14.2.4",
     "react": "^18",
+    "react-apexcharts": "^1.4.1",
+    "react-csv": "^2.2.2",
     "react-dom": "^18",
-    "next": "14.0.4"
+    "react-hook-form": "^7.52.0",
+    "rxjs": "^7.8.1",
+    "sass": "^1.69.5",
+    "socket.io-client": "^4.7.5",
+    "zod": "^3.23.8",
+    "zustand": "^4.5.2"
   }
 }
