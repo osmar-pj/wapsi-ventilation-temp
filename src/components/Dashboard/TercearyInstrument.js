@@ -5,7 +5,7 @@ const TercearyInstrument = ({ status }) => {
   let circleColor = '';
   let circleText = '';
 
-  // Determinar el color y el texto del círculo según el estado
+  // Determinar el color y el texto del círculo según el estado ->
   switch (status) {
     case 'unconfirmed':
       circleColor = '#3f3f45';

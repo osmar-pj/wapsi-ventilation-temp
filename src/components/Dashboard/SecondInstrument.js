@@ -9,7 +9,7 @@ import { renderNameWithSubscript, separarNumero } from "../../libs/utils";
 const SecondInstrument = ({ status, name, value, und }) => {
   let IconComponent;
 
-  // Si no es "desact", determinar qué componente de icono usar según iconName
+  // Si no es "desact", determinar qué componente de icono usar según iconName ->
   switch (name) {
     case "HUM":
       IconComponent = IconHumidity;
@@ -31,7 +31,7 @@ const SecondInstrument = ({ status, name, value, und }) => {
       break;
   }
 
-  // Determinar la clase para el estado del círculo
+  // Determinar la clase para el estado del círculo .>
   const circleClass = status;
 
   const formattedValue = parseFloat(value).toFixed(2);

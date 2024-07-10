@@ -3,17 +3,24 @@ import { create } from "zustand";
 import { GetData, PutData } from "../libs/api";
 
 export const useSocketStore = create((set) => ({
-  dataInstruments: {},
+  //Data sobre informacion de mina y nivel
+  datInfoGeneral: {},
+  //Lista de Instrumentos de los Sensores
   devices: [],
+  //Lista de Instrumentos de los Ventiladores
   dataventilators: [],
+  //Valor del Horometro
   datahorometer: {},
+  //Valor de carga
   isLoading: true,
 
+  //Socket de los sensores
   connectSocketSensors: () => {
     const socket = io(process.env.API_URL);
     socket.on("sensors", (data) => {
       set((state) => ({
-        dataInstruments: { ...state.dataInstruments, ...data },
+        //Inserta data a datInfoGeneral
+        datInfoGeneral: { ...state.datInfoGeneral, ...data },
         devices: data.devices || state.devices,
         isLoading: false,
       }));
@@ -23,11 +30,12 @@ export const useSocketStore = create((set) => ({
       socket.disconnect();
     };
   },
-
+  //Socket de ventiladores
   connectSocketVentilators: () => {
     const socket = io(process.env.API_URL);
     socket.on("ventilators", (data) => {
       set((state) => ({
+        //Inserta data a dataventilators
         dataventilators: { ...state.dataventilators, ...data },
         isLoading: false,
       }));
@@ -37,11 +45,12 @@ export const useSocketStore = create((set) => ({
       socket.disconnect();
     };
   },
-
+  //Socket del homotetro
   connectSocketHorometer: () => {
     const socket = io(process.env.API_URL);
     socket.on("horometer", (data) => {
       set((state) => ({
+        //Inserta data a datahorometer
         datahorometer: { ...state.datahorometer, ...data },
         isLoading: false,
       }));
@@ -54,14 +63,22 @@ export const useSocketStore = create((set) => ({
 }));
 
 export const useGlobalStore = create((set) => ({
+  //Data sobre connfigración general 
   configGeneral: [],
+  //Data sobre grafico de barras
   dataGraphicHistory: [],
+  //Data del grafico de barrar CSV
   dataCSVHistory: [],
+  //Valor del promedio de History -> Grafico de barra vertical
   dataMeanHistory: null,
+  //Lista de los dias que se tiene informacion para el grafico Analytic
   dataGraphicDates: [],
+  //Data del grafico de Analytic -> Grafico de lineas
   dataGraphicAnalytic: [],
+  //Valor de carga
   isLoading: true,
 
+  //Obtener datos de configuracion
   fetchConfigGeneral: async () => {
     try {
       const dataNew = await GetData("config/1");
@@ -71,7 +88,7 @@ export const useGlobalStore = create((set) => ({
       set({ isLoading: false });
     }
   },
-
+  //Obtener data History -> Grafico de barra vertical
   fetchGraphicHistory: async () => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -96,6 +113,8 @@ export const useGlobalStore = create((set) => ({
       set({ isLoading: false });
     }
   },
+
+  //Obtener fechas para el grafico Analytic -> Grafico de lineas
   fetchGraphicDates: async () => {
     try {
       const dataNew = await GetData(`getDate`);
@@ -105,6 +124,8 @@ export const useGlobalStore = create((set) => ({
       console.error("Error:", error);
     }
   },
+
+  //Obtener data Analytyc -> Grafico de lineas
   fetchGraphicAnalytic: async (time, name) => {
     try {
       set({ isLoading: true });
@@ -115,6 +136,7 @@ export const useGlobalStore = create((set) => ({
       set({ isLoading: false });
     }
   },
+  //Actualizar informacion de configuracion
   updateConfigGeneral: async (data) => {
     try {
       const dataNew = await PutData("config/1", data);
@@ -125,45 +147,3 @@ export const useGlobalStore = create((set) => ({
     }
   },
 }));
-
-// fetchConfigInstruments: async () => {
-//   try {
-//     const dataNew = await GetData("sensor");
-//     set({ configInstruments: dataNew });
-//   } catch (error) {
-//     console.error("Error:", error);
-//   }
-// },
-// createInstrument: async (data) => {
-//   try {
-//     const dataNew = await PostData("sensor", data);
-//     return dataNew;
-//   } catch (error) {
-//     console.error("Error:", error);
-//   }
-// },
-// updateInstrument: async (data) => {
-//   try {
-//     const dataNew = await PutData("sensor", data);
-//     return dataNew;
-//   } catch (error) {
-//     console.error("Error:", error);
-//   }
-// },
-// updateConfigGeneral: async (data) => {
-//   try {
-//     const dataNew = await PutData("config/1", data);
-//     return dataNew;
-//   } catch (error) {
-//     console.error("Error:", error);
-//   }
-// },
-// deleteInstrument: async (id) => {
-//   console.log(id);
-//   try {
-//     const dataNew = await DeleteData(`sensor/${id}`);
-//     return dataNew;
-//   } catch (error) {
-//     console.error("Error:", error);
-//   }
-// },

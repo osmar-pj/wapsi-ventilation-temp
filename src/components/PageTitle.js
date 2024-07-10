@@ -1,7 +1,7 @@
 import { useSocketStore } from "../store/useGlobalStore";
 
 const PageTitle = () => {
-  const { dataInstruments, datahorometer,isLoading } = useSocketStore();
+  const { datInfoGeneral, datahorometer,isLoading } = useSocketStore();
 
   return (
     <>
@@ -13,8 +13,8 @@ const PageTitle = () => {
         </div>
       ) : (
         <div className="Page-title">
-          <span className="t-mining">{dataInstruments?.mining ?? "--"}</span>
-          <h1>{dataInstruments?.level ?? "--"}</h1>
+          <span className="t-mining">{datInfoGeneral?.mining ?? "--"}</span>
+          <h1>{datInfoGeneral?.level ?? "--"}</h1>
           <h3>{datahorometer?.horometer !== undefined ? datahorometer.horometer.toFixed(2) : "--"} horometro</h3>
         </div>
       )}
